@@ -1,0 +1,54 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-clientapp:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build clientapp Docker image
+      run: docker build ./compose_setup --file ./compose_setup/clientapp.Dockerfile --tag bc_clientapp:$(date +%s)
+  build-superexec:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build superexec Docker image
+      run: docker build ./compose_setup --file ./compose_setup/superexec.Dockerfile --tag bc_superexec:$(date +%s)
+  test-compose:
+    runs-on: ubuntu-latest
+    needs: [build-clientapp, build-superexec]  # Ensure builds are complete before running tests
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run Docker Compose
+        working-directory: ./compose_setup  # Set the working directory
+        run: |
+          docker compose up -d --build
+          docker compose down
+  test-compose-with-flwr:
+    runs-on: ubuntu-latest
+    needs: [test-compose]  # Ensure builds are complete before running tests
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run Docker Compose
+        working-directory: ./compose_setup  # Set the working directory
+        # workaround for "no space left on device" issues: 
+        # https://github.com/actions/runner-images/issues/709
+        # https://github.com/orgs/community/discussions/26488
+        run: |
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo mkdir agg-weights
+          sudo chmod -R 777 ./agg-weights
+          docker compose up -d --build
+          pip install -q flwr[simulation] 
+          pip install -q flwr-datasets[vision] 
+          pip install -q torch 
+          pip install -q torchvision 
+          pip install -q ray
+          flwr run breastcancer local-deployment --stream
+          docker compose down

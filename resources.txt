@@ -1,0 +1,10 @@
+Flower Architecture
+https://flower.ai/docs/framework/explanation-flower-architecture.html
+
+Quickstart with Docker Compose
+https://flower.ai/docs/framework/docker/tutorial-quickstart-docker-compose.html#step-3-run-the-quickstart-project
+
+Save and load model checkpoints
+https://flower.ai/docs/framework/how-to-save-and-load-model-checkpoints.html
+
+
