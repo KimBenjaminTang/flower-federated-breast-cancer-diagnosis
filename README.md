@@ -102,10 +102,15 @@ Set up a Docker-based simulation of the federated learning system you implemente
    - **Docker compose file: [compose.yml](https://github.com/KimBenjaminTang/federated-breast-cancer-prediction/blob/main/compose_setup/compose.yml)**
 ### 3. A README file explaining how to set up, run, and test the Dockerized environment
    - **Ideally, use the github codespace:**
-     1. **Go to dir: /compose_setup/**
-     2. **Execute "docker compose up -d": Run docker compose file to spin up/build containers detached from console (1 superlink, 1 superexec, 5 supernodes, 5 clientapps)**
-     3. **Execute "flwr run breastcancer local-deployment --stream" to run the flower project with the configuration in pyproject.toml for local-deployment**
-- The github workflow also shows how the docker compose & flower execution runs (first stage build client & superexec container, then test docker compose, then test docker compose with flower)**
+     1. "pip uninstall flwr" & "pip install flwr" (for some reason it is installed but flwr cli cant be used unless its reinstalled)
+     2. install python & jupyter extensions in vscode menu
+     3. run all cells in federated_breast_canceer.ipynb
+     4. in terminal, go to dir: /compose_setup/
+     5. Execute "docker compose up -d": Run docker compose file to spin up/build containers
+     6. Execute "flwr run breastcancer local-deployment --stream" to run the flower project with the configuration in pyproject.toml for local-deployment
+   - **Locally:** install requirements from requirements.txt & then go to /compose_setup/ in cloned repository to continue with step 5. from above.
+   
+The github workflow also shows how the docker compose & flower execution runs (first stage build client & superexec container, then test docker compose, then test docker compose with flower)**
 
 **This is an overview of the docker compose setup to run flower for the federated learning breast cancere classification:**
 ![grafik](https://github.com/user-attachments/assets/fb4ea300-a810-4909-b9b5-07a0a5913898)
