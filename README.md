@@ -36,7 +36,7 @@ model updates from clients to produce a global model
 <summary> $${\color{blue}Submission}$$ </summary>
 
 ### 1. Code in a Jupyter notebook or Python scripts, well-commented and organized
-   - Jupyter Notebook: [federated_breast_cancer.ipynb](https://github.com/KimBenjaminTang/federated-breast-cancer-prediction/blob/main/federated_breast_cancer.ipynb)
+   - Jupyter Notebook: [federated_breast_cancer.ipynb](federated_breast_cancer.ipynb)
 ### 2. A short README file explaining of your design choices
 1. **Data Distribution: Horizontal split randomly of patient data across five institutions**
    - horizontal: more common use case than vertical split
@@ -58,15 +58,15 @@ model updates from clients to produce a global model
 
 **Overview of the minimal dataset modification:**
 
-![image](https://github.com/user-attachments/assets/27e89c16-8233-4d2b-9352-bbd36bb95f3e)
+![image](media/figures/task1_slight_dataset_modification.png)
 
 **Overview of the horizontal data split:**
 
-![image](https://github.com/user-attachments/assets/bd1561b0-e41c-43e0-99f7-fd947bc06675)
+![image](media/figures/task1_horizontal_data_split.png)
 
 **Overview of the data split for the institutions and final model evaluation:**
 
-![image](https://github.com/user-attachments/assets/aa265a99-174c-44fc-8868-a06d4e4aa44d)
+![image](media/figures/task1_train_val_test_split.png)
 
 </details>
 
@@ -96,10 +96,10 @@ Set up a Docker-based simulation of the federated learning system you implemente
 <summary> $${\color{blue}Submission}$$ </summary>
 
 ### 1. Dockerfiles for the client and server containers
-   - **Client Dockerfile: [clientapp.Dockerfile](https://github.com/KimBenjaminTang/federated-breast-cancer-prediction/blob/main/compose_setup/clientapp.Dockerfile)**
-   - **Server Dockerfile: [superexec.Dockerfile](https://github.com/KimBenjaminTang/federated-breast-cancer-prediction/blob/main/compose_setup/superexec.Dockerfile)**
+   - **Client Dockerfile: [clientapp.Dockerfile](compose_setup/clientapp.Dockerfile)**
+   - **Server Dockerfile: [superexec.Dockerfile](compose_setup/superexec.Dockerfile)**
 ### 2. A Docker Compose file to orchestrate the system
-   - **Docker compose file: [compose.yml](https://github.com/KimBenjaminTang/federated-breast-cancer-prediction/blob/main/compose_setup/compose.yml)**
+   - **Docker compose file: [compose.yml](compose_setup/compose.yml)**
 ### 3. A README file explaining how to set up, run, and test the Dockerized environment
    - **Ideally, use the github codespace:**
      1. "pip uninstall flwr" & "pip install flwr" (for some reason it is installed but flwr cli cant be used unless its reinstalled)
@@ -113,7 +113,7 @@ Set up a Docker-based simulation of the federated learning system you implemente
 The github workflow also shows how the docker compose & flower execution runs (first stage build client & superexec container, then test docker compose, then test docker compose with flower)**
 
 **This is an overview of the docker compose setup to run flower for the federated learning breast cancere classification:**
-![grafik](https://github.com/user-attachments/assets/fb4ea300-a810-4909-b9b5-07a0a5913898)
+![image](media/figures/task2_docker_compose.png)
 
 </details>
 
